@@ -30,7 +30,7 @@ public class Individuo {
         calcularFenotipo();
         //2x²+ x+1
         this.fitness= (long) (2*Math.pow(this.feno, 2)+this.feno+1);
-        System.out.println(this.toString());   
+     //   System.out.println(this.toString());   
     }
     
     private void calcularFenotipo() {
@@ -46,7 +46,7 @@ public class Individuo {
 
     @Override
     public String toString() {
-        return "Genotipo: " + Arrays.toString(geno) + ", Fenotipo=" + feno + ", Fitness=" + fitness;
+        return feno + ": " + fitness +". Genotipo: " + Arrays.toString(geno);
     }
     
     
