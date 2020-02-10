@@ -16,6 +16,10 @@ public class Poblacion {
     private LinkedList<Individuo> poblacion;
     private int i;
     
+    public Poblacion(){
+        this.poblacion = new LinkedList<>();
+    }    
+    
 //Aleatoria
     public Poblacion(int i){
         this.i=i;
@@ -23,11 +27,21 @@ public class Poblacion {
         InicializacionAleatoria();
     }
     
+    //Con población completa
+    public Poblacion(Poblacion muestra){
+       // this.i=muestra.size();
+        this.poblacion = new LinkedList<>();
+        muestra.getPoblacion().forEach((Individuo a)-> this.poblacion.add(new Individuo(a.getGeno())));
+        
+        // como se resolvera el 
+    } 
 //Con muestra
     public Poblacion(LinkedList<Individuo> muestra, int i){
         this.i=i;
         this.poblacion = new LinkedList<>();
-        for (int x =0; x<muestra.size(); x++) this.poblacion.add(new Individuo(muestra.get(x).getGeno()));
+        muestra.forEach((Individuo a)-> this.poblacion.add(new Individuo(a.getGeno())));
+        
+        // como se resolvera el 
     }
     
     
