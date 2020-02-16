@@ -24,11 +24,18 @@ public class GeneticoV1 {
         this.pActual = new Poblacion(this.pSize);
     }
     
+    public GeneticoV1(int G, double Muta, int pobla, boolean mayor){
+        this.numG=G;
+        this.pMuta= Muta;
+        this.pSize= pobla;
+        this.pActual = new Poblacion(this.pSize, mayor);
+    }
+    
     public void evolucionar(){
         //proceso evolutivo que genera nuevas poblaciones
         for (int g=0; g<this.numG;g++) {
             Poblacion neww = new Poblacion();
-            
+            //individuo random
             Individuo Mejor = new Individuo(31);
             
             for (int i = 0 ; i < this.pSize; i++){
@@ -50,5 +57,31 @@ public class GeneticoV1 {
             this.pActual= new Poblacion(neww);
         }
     }
+    
+    
+    public void evolucionMinimizando(){
+        //proceso evolutivo que genera nuevas poblaciones
+        for (int g=0; g<this.numG;g++) {
+            Poblacion neww = new Poblacion();
+            
+            Individuo Mejor = new Individuo(31);
+            for (int i = 0 ; i < this.pSize; i++){
+                //seleccion
+                Individuo mom = Seleccion.Aleatoria(pActual);
+                Individuo dad = Seleccion.Aleatoria(pActual);
+                //cruza
+                Individuo hijo = Cruza.CruzaMin(new int[]{1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1}, mom, dad);
+                //mutacion
+                if (Math.random()<this.pMuta){
+                    Muta.toggel(hijo);
+                }
+                
+                if (hijo.getFeno()< Mejor.getFeno()){ neww.getPoblacion().add(hijo); Mejor = new Individuo(hijo.getGeno());}
+                else neww.getPoblacion().add(Mejor);
 
+            }
+                            System.out.println("G"+g+": "+Mejor.toString());
+            this.pActual= new Poblacion(neww);
+        }
+    }
 }

@@ -20,16 +20,36 @@ public class Individuo {
     public Individuo(int n){
         this.geno= new int[n];
         IniciarRandom();
-        this.calcularFitness();
+        this.calcularFitness2();
     }
+    
+    public Individuo(int n, boolean mayor){
+        if (mayor){
+            this.geno = new int[n];
+            for (int i =0; i<n;i++) this.geno[i] = 1;
+            this.calcularFitness2();
+        }else{
+            this.geno= new int[n];
+            IniciarRandom();
+            this.calcularFitness2();
+        }
+    }
+    
     public Individuo(int n[]){
         this.geno= n.clone();
-        this.calcularFitness();
+        this.calcularFitness2();
     }
     public void calcularFitness(){
         calcularFenotipo();
         //2x²+ x+1
         this.fitness= (long) (2*Math.pow(this.feno, 2)+this.feno+1);
+     //   System.out.println(this.toString());   
+    }
+    
+    public void calcularFitness2(){
+        calcularFenotipo();
+        //x²-x
+        this.fitness= (long) (Math.pow(this.feno, 2)-this.feno);
      //   System.out.println(this.toString());   
     }
     

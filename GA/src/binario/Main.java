@@ -5,7 +5,6 @@
  */
 package binario;
 
-import java.util.LinkedList;
 
 /**
  *
@@ -19,8 +18,8 @@ public class Main {
     public static void main(String[] args) {
         
         
-        GeneticoV1 wop =new GeneticoV1(10, .3, 50);
-        wop.evolucionar();
+        GeneticoV1 wop =new GeneticoV1(30, 0.2, 25);
+        wop.evolucionMinimizando();
         
     }
     

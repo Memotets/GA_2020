@@ -27,6 +27,16 @@ public class Poblacion {
         InicializacionAleatoria();
     }
     
+     public Poblacion(int i, boolean mayor){
+         this.i=i;
+         this.poblacion = new LinkedList<>();
+         if (!mayor){
+            InicializacionAleatoria();
+        }else{
+           inicializacionMayor(); 
+        }
+    }
+    
     //Con población completa
     public Poblacion(Poblacion muestra){
        // this.i=muestra.size();
@@ -44,7 +54,12 @@ public class Poblacion {
         // como se resolvera el 
     }
     
-    
+
+    private void inicializacionMayor() {
+        for(int x = 0; x<this.i;x++){
+            this.poblacion.add(new Individuo(31, true));
+        }        
+    }    
 
     private void InicializacionAleatoria() {
         for(int x = 0; x<this.i;x++){
