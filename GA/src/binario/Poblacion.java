@@ -5,6 +5,8 @@
  */
 package binario;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -43,7 +45,6 @@ public class Poblacion {
         this.poblacion = new LinkedList<>();
         muestra.getPoblacion().forEach((Individuo a)-> this.poblacion.add(new Individuo(a.getGeno())));
         
-        // como se resolvera el 
     } 
 //Con muestra
     public Poblacion(LinkedList<Individuo> muestra, int i){
@@ -51,7 +52,6 @@ public class Poblacion {
         this.poblacion = new LinkedList<>();
         muestra.forEach((Individuo a)-> this.poblacion.add(new Individuo(a.getGeno())));
         
-        // como se resolvera el 
     }
     
 
@@ -80,6 +80,20 @@ public class Poblacion {
         }
         return muestra;
     }
+    
+     public LinkedList<Individuo> generarMuestraMejores(double n){
+        int c = (int) ((n/100)*this.i);
+        
+        LinkedList<Individuo> muestra = new LinkedList<>();
+        
+        Collections.sort(this.poblacion,new Betters());
+        
+        for (int i = 0 ; i<c; i++){
+            muestra.add(this.poblacion.get(i));
+        }
+        
+        return muestra;
+    }
 
     public LinkedList<Individuo> getPoblacion() {
         return poblacion;
@@ -95,6 +109,17 @@ public class Poblacion {
 
     public void setI(int i) {
         this.i = i;
+    }
+
+    private static class Betters implements Comparator<Individuo>{
+            @Override
+            public int compare(Individuo e1, Individuo e2) {
+	if(e1.getFeno()> e2.getFeno()){
+                        return 1;
+	} else {
+                        return -1;
+                    }
+            }
     }
     
 }

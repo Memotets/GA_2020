@@ -17,9 +17,15 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        Poblacion n = new Poblacion(20);
+        System.out.println("Poblacion original: ");
+        n.getPoblacion().forEach((Individuo a) -> System.out.println(a.toString()));
+                System.out.println("");
+        System.out.println("Poblacion muestra: ");        
+        n.generarMuestraMejores(20).forEach((Individuo a) -> System.out.println(a.toString()));
         
-        GeneticoV1 wop =new GeneticoV1(30, 0.2, 25);
-        wop.evolucionMinimizando();
+//        GeneticoV1 wop =new GeneticoV1(30, 0.2, 25);
+//        wop.evolucionMinimizando();
         
     }
     
