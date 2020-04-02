@@ -5,9 +5,8 @@
  */
 package tsp;
 
-import binario.*;
 import extra.Collection;
-import java.util.Random;
+
 
 /**
  *
@@ -27,8 +26,7 @@ public class GeneticoTSP {
         this.ci =ci;
         this.n=n;
         this.pActual = new Poblacion(this.pSize, this.ci, this.n);
-    }
-    
+    }  
     public void evolucionar(){
         System.out.println("Iniciando 1er generacion");
         //proceso evolutivo que genera nuevas poblaciones
@@ -62,8 +60,7 @@ public class GeneticoTSP {
         System.out.println("G"+this.numG+": "+Mejor.toString());
         Collection.guardarTSP(Mejor);
     }
-    
-        public void evolucionar(Individuo mejor){
+    public void evolucionar(Individuo mejor){
         //proceso evolutivo que genera nuevas poblaciones
         boolean change=false;
         Individuo Mejor = new Individuo(mejor.getGenotipo());
@@ -75,8 +72,8 @@ public class GeneticoTSP {
             for (int i = 0 ; i < this.pSize; i++){
                 
                 //seleccion
-                Individuo mom = Seleccion.Torneo(pActual);
-                Individuo dad = Seleccion.Torneo2do(pActual);
+                Individuo mom = Seleccion.Aleatoria(pActual);
+                Individuo dad = Seleccion.Aleatoria(pActual);
                 //cruza
                 Individuo hijo = Cruza.Asexual(mom,dad);
                 //mutacion
