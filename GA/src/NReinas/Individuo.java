@@ -23,7 +23,7 @@ public class Individuo {
             genotipo = new int[n];
             inicializarAleatoriamente();
             CalcularFitness();
-            System.err.println(toString());
+           // System.err.println(toString());
         }else{
             System.err.println("El problema de las N-Reinas no puede solucionarse si N es <= 3");
         }
@@ -33,7 +33,7 @@ public class Individuo {
         this.genotipo = genotipo.clone();
         //inicializarAleatoriamente();
         CalcularFitness();
-        System.err.println(toString());
+        //System.err.println(toString());
     }
 
     private void inicializarAleatoriamente() {
@@ -81,6 +81,14 @@ public class Individuo {
         }
                     
         return k;
+    }
+
+    public int[] getGenotipo() {
+        return genotipo;
+    }
+
+    public int getFitness() {
+        return fitness;
     }
 
     @Override

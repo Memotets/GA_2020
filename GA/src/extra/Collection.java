@@ -13,17 +13,51 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import tsp.Individuo;
+//import tsp.Individuo;
 
 /**
  *
  * @author memotets89
  */
 public class Collection {
-     public static void guardarTSP(Individuo ind){
+    public static void saveNQueens(NReinas.Individuo ind){
+                FileWriter fichero = null;
+        PrintWriter pw = null;
+        String cT = "NQueens_N"+ind.getGenotipo().length;
+        mkDir(cT);
+        Date fecha = new Date();
+        Calendar c = Calendar.getInstance();
+        String nombre= ind.getGenotipo().length+"_"+ind.getFitness()+"_("
+                +c.get(Calendar.DATE)+"-"+(c.get(Calendar.MONTH)+1)+")_["
+                +fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds()+"]"; 
+        try
+        {
+            fichero = new FileWriter(cT+"/"+nombre+".txt");
+            pw = new PrintWriter(fichero);
+            pw.println(ind.getGenotipo().length);           // tablero de N
+            pw.println(ind.getFitness());                   // Numero de choques
+            for(int i =0; i<ind.getGenotipo().length;i++){  //  Configuración de tablero
+                if (i != (ind.getGenotipo().length-1)) pw.print(ind.getGenotipo()[i]+",");
+                else pw.println(ind.getGenotipo()[i]);
+            }
+            System.out.println("Archivo creado: " + nombre);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+                if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+    }
+     public static void guardarTSP(tsp.Individuo ind){
         FileWriter fichero = null;
         PrintWriter pw = null;
         String cT = ""+ind.getGenotipo().length;
@@ -55,7 +89,7 @@ public class Collection {
 
     }
      
-     public static Individuo LeerMejor() throws FileNotFoundException, IOException{
+     public static tsp.Individuo LeerTSP() throws FileNotFoundException, IOException{
          // definir los filtros para lectura
         FileNameExtensionFilter filtro =
         new FileNameExtensionFilter(".txt",".csv",".xml");
@@ -91,7 +125,7 @@ public class Collection {
          String[]geno = linea.split(",");
          int[] newGenotipo = new int[geno.length];
          for (int x =0; x<newGenotipo.length;x++)newGenotipo[x] = Integer.parseInt(geno[x]);
-         return new Individuo(newGenotipo); 
+         return new tsp.Individuo(newGenotipo); 
         
      }
     

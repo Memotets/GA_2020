@@ -5,8 +5,7 @@
  */
 package tsp;
 
-import java.util.Comparator;
-import java.util.LinkedList;
+
 import java.util.Random;
 
 public class Seleccion {
