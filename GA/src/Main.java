@@ -1,27 +1,35 @@
 
-import NReinas.GeneticoNReinas;
+import SAT.Genetico;
+import SAT.Individuo;
+import SAT.Muta;
+import extra.readSAT;
+import java.io.IOException;
 
 
 public class Main {
 
 
 
-    public static void main(String[] args) {
-        try {
-            //Individuo.matrizDistancias = generadorMatrix.cargarMatriz();
-            //Individuo p1 = Collection.LeerMejor();x
-            GeneticoNReinas prueba1 = new GeneticoNReinas(100000, 0.7, 200, 100);
-            prueba1.evolucionar();
-        } catch (Exception e) {
-      // TODO Auto-generated catch block
-            e.printStackTrace();
-       }
-        //Individuo n1 = new Individuo(5);
+    public static void main(String[] args) throws IOException {
+        //--Lectura para configurar genetico----
+        readSAT.archivo = readSAT.readFile();  
+        Individuo.clausulas = readSAT.readSat();
+        int n = readSAT.numGenes();
+        //--------------------------------------
+        
+
+       Genetico SAT = new Genetico(25000, .5, 25, n);
+       SAT.evolucionar();
+       
+       
+        
+        System.out.println();
+        
+        
+       
         }
    
 
     }
-    
-    //6, 3, 1, 4, 7, 5, 2, 0
     
 

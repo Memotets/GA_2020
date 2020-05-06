@@ -5,6 +5,7 @@
  */
 package extra;
 
+import SAT.Individuo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,6 +58,39 @@ public class Collection {
            }
         }
     }
+    
+    public static void saveSAT(SAT.Individuo ind){
+                FileWriter fichero = null;
+        PrintWriter pw = null;
+        String cT = "SAT";
+        mkDir(cT);
+        String nombre= "Pruebas_"+ind.getFitness()+"("+Math.random()+")"; 
+        try
+        {
+            fichero = new FileWriter(cT+"/"+nombre+".txt");
+            pw = new PrintWriter(fichero);
+            pw.println(ind.getGenotipo().length);           // cantidad de booleans
+            pw.println(ind.getFitness());                   // clausulas verdaderas
+            pw.println(Individuo.clausulas.length); //numero de clausulas
+            pw.println(Individuo.clausulas[0].length); //cantidad de booleans por clausula
+            for(int i =0; i<ind.getGenotipo().length;i++){  // combinatoria de booleans
+                if (i != (ind.getGenotipo().length-1)) pw.print(ind.getGenotipo()[i]+" ");
+                else pw.println(ind.getGenotipo()[i]);
+            }
+            System.out.println("Archivo creado: " + nombre);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+                if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+    }
+    
      public static void guardarTSP(tsp.Individuo ind){
         FileWriter fichero = null;
         PrintWriter pw = null;

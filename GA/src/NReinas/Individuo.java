@@ -51,9 +51,20 @@ public class Individuo {
         for(int i =0; i<this.genotipo.length-1;i++){
             fitness += ChoqueSuperior(i);
             fitness += ChoqueInferior(i);
+            fitness += ChoqueHorizontal(i);
         }
     }
-    
+    private int ChoqueHorizontal(int i){
+        int k =0; //k contante de choque;
+        int y = genotipo[i];
+        int x = i+1;
+        while(x != genotipo.length){
+            if (y == genotipo[x])k+=2; //como solo busco recorrer en un sentido, agrego 2 choques
+            x++; // avanzo en x  
+        }
+                    
+        return k;
+    }
     private int ChoqueSuperior(int i){
         int k =0; //k contante de choque;
         if (genotipo[i] !=0){
